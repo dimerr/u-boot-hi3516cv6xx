@@ -1,0 +1,40 @@
+# for audio
+ifeq ($(CONFIG_AUDIO_ENABLE),y)
+ifeq ($(CONFIG_PRODUCTNAME),$(filter $(CONFIG_PRODUCTNAME), "hi3519dv500" "hi3516dv500"))
+AO_ARCH_NAME = hi3519dv500
+ACODEC_NAME = v751
+else ifeq ($(CONFIG_PRODUCTNAME), "hi3516cv610")
+AO_ARCH_NAME = hi3516cv610
+ACODEC_NAME = v752
+endif
+cflags-y += -I$(srctree)/product/audio/ao/include
+cflags-y += -I$(srctree)/product/audio/acodec/$(ACODEC_NAME)
+ccflags-y += $(cflags-y)
+obj-y += cmd_ao.o
+endif
+
+# Osd command
+ifeq ($(CONFIG_OSD_ENABLE),y)
+# for dec
+obj-y += cmd_dec.o
+ifeq ($(CONFIG_PRODUCTNAME), "hi3519dv500")
+VO_ARCH_NAME = $(CONFIG_PRODUCTNAME)
+
+VO_SUB_ARCH_NAME = $(CONFIG_PRODUCTNAME)
+cflags-y     += -I$(srctree)/product/ot_osd/vo/include
+cflags-y     += -I$(srctree)/product/ot_osd/include
+cflags-y     += -I$(srctree)/product/ot_osd/vo/arch/$(VO_ARCH_NAME)/include
+cflags-y     += -I$(srctree)/product/ot_osd/vo/arch/$(VO_ARCH_NAME)/include/$(VO_SUB_ARCH_NAME)
+ccflags-y    += $(cflags-y)
+obj-y += cmd_vo.o
+endif
+
+
+ifeq ($(CONFIG_PRODUCTNAME), "hi3519dv500")
+ccflags-y += -DCHIP_HI3519DV500
+ccflags-y += -DCONFIG_OT_MIPI_TX_SUPPORT
+cflags-y  += -I$(srctree)/product/ot_osd/mipi_tx/hi3519dv500
+ccflags-y += $(cflags-y)
+endif
+
+endif

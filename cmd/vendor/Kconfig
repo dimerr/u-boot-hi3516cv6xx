@@ -1,0 +1,28 @@
+menu "Vendor command line interface"
+
+config CMD_IPCBOOT
+	bool "command for ipc boot"
+	depends on ARCH_BSP
+	default y
+	help
+	   Support for testing ddr3 on TI platforms. This command
+	   supports memory verification, memory comapre and ecc
+	   verification if supported.
+
+config CMD_GETINFO
+	bool "command for print mtd info"
+	depends on ARCH_BSP
+	default y
+	help
+	   Debug command for K3 power domains. For this to work, the
+	   K3 power domain driver must be enabled for the u-boot; by
+	   default it is only enabled for SPL.
+
+config CMD_TIMESTAMP
+	bool "timestamp - record timestamp"
+	depends on ARCH_BSP
+	help
+	  Enable the 'timestamp' command which record timestamp in DDR since
+	  Chip started running.
+
+endmenu

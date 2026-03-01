@@ -1,0 +1,1 @@
+obj-$(CONFIG_MMC_SDHCI_NEBULA) += mmc/

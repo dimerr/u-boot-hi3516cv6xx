@@ -1,0 +1,5 @@
+menu "Vendor driver support"
+
+source "drivers/vendor/mmc/Kconfig"
+
+endmenu

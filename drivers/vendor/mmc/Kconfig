@@ -1,0 +1,16 @@
+
+config MMC_SDHCI_NEBULA
+	bool "SDHCI support for the Soct SD/SDIO/eMMC controller"
+	depends on MMC_SDHCI
+	help
+	  This selects the Soct SD/SDIO/eMMC driver.
+	  If you have a controller with this interface, say Y here.
+	  If unsure, say N.
+
+config MMC_QUICKBOOT
+	bool "SDHCI support quick boot"
+	depends on MMC_SDHCI_NEBULA
+	help
+	  This selects quick boot.
+	  If you want to support quick boot, say Y here.
+	  If unsure, say N.
