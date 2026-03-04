@@ -214,7 +214,6 @@ static int print_cpuinfo(void)
 #ifndef CONFIG_MINI_BOOT
 static int announce_dram_init(void)
 {
-	puts("DRAM:  ");
 	return 0;
 }
 #endif
@@ -247,7 +246,8 @@ __weak int dram_init_banksize(void)
 {
 	gd->bd->bi_dram[0].start = gd->ram_base;
 	gd->bd->bi_dram[0].size = get_effective_memsize();
-
+	puts("DRAM:  ");
+	print_size(gd->ram_size, "\n");
 	return 0;
 }
 
