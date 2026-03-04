@@ -1206,6 +1206,25 @@ static struct spi_nor_info fmc_spi_nor_info_table[] = {
 		&spi_driver_general,
 	},
 
+	{
+		"BY25Q64ES",  {0x68, 0x40, 0x17}, 3, _8M,   _64K, 3,
+		{
+			&read_std(0, INFINITE, 50), /* 50MHz */
+			0
+		},
+
+		{
+			&write_std(0, 256, 33), /* 80MHz */
+			0
+		},
+
+		{
+			&erase_sector_64k(0, _64K, 80), /* 80MHz */
+			0
+		},
+		&spi_driver_general,
+	},
+
 	{0, {0}, 0, 0, 0, 0, {0}, {0}, {0}, NULL},
 };
 
