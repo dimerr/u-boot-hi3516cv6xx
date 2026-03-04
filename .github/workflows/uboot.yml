@@ -1,0 +1,27 @@
+name: uboot
+on:
+  workflow_dispatch:
+
+jobs:
+  toolchain:
+    name: Uboot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone
+
+      - name: HI3516CV6XX
+        run: |
+          git clone https://github.com/dimerr/u-boot-hi3516cv6xx --depth 1
+          cd u-boot-hi3516cv6xx
+          bash build.sh
+
+      - name: Upload
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          files: |
+            u-boot-*/output/*-nor.bin
+            u-boot-*/output/*-nand.bin
