@@ -22,7 +22,7 @@ for SOCMODEL in 10b 20s 20g 00s 00g; do
     make distclean
     make ${CHIP}_openipc_defconfig
     make -j`nproc` KCFLAGS="-DPRODUCT_SOC=${CHIP} -DPRODUCT_SOCMODEL=${SOCMODEL} -DVENDOR_HISILICON"
-    cp ./gzip arch/arm/cpu/armv7/${CHIP}/hw_compressed -rf
+    # cp ./gzip arch/arm/cpu/armv7/${CHIP}/hw_compressed -rf
 
     make u-boot-z.bin
     make u-boot-z.clean
@@ -39,7 +39,7 @@ build_cv608(){
     make distclean
     make ${CHIP}_openipc_defconfig
     make -j`nproc` KCFLAGS="-DPRODUCT_SOC=${CHIP} -DPRODUCT_SOCMODEL= -DVENDOR_HISILICON"
-    cp ./gzip arch/arm/cpu/armv7/hi3516cv610/hw_compressed -rf
+    # cp ./gzip arch/arm/cpu/armv7/hi3516cv610/hw_compressed -rf
 
     make u-boot-z.bin
     make u-boot-z.clean
