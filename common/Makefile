@@ -127,3 +127,4 @@ obj-y += flash_read.o
 obj-y += flash_write.o
 
 obj-$(CONFIG_ARCH_BSP) += boot_image.o
+obj-y += openipc.o

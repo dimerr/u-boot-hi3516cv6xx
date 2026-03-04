@@ -18,6 +18,7 @@
 #include <serial.h>
 #include <linux/mtd/mtd.h>
 #include <linux/delay.h>
+#include <openipc.h>
 #if CONFIG_IS_ENABLED(CMD_TIMESTAMP)
 #include "cmd_timestamp.h"
 #endif
@@ -341,6 +342,7 @@ static void set_bootloader_download_process_flag(void)
 
 int misc_init_r(void)
 {
+	openipc_helper();
 #ifdef CONFIG_RANDOM_ETHADDR
 	random_init_r();
 #endif
@@ -392,7 +394,7 @@ int dram_init(void)
 {
 	DECLARE_GLOBAL_DATA_PTR;
 
-	gd->ram_size = PHYS_SDRAM_1_SIZE;
+	gd->ram_size = get_ram_size((void *)CONFIG_SYS_SDRAM_BASE, 0x20000000);
 	return 0;
 }
 
