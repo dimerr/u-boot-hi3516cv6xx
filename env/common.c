@@ -307,6 +307,11 @@ int env_import(const char *buf, int check, int flags)
 
 		if (crc32(0, ep->data, ENV_SIZE) != crc) {
 			env_set_default("bad CRC", 0);
+
+			if (crc == 0xffffffff) {
+				printf("Saving default environment...\n");
+				env_save();
+			}
 			return -ENOMSG; /* needed for env_load() */
 		}
 	}
