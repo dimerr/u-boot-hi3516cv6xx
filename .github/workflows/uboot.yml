@@ -5,12 +5,12 @@ on:
 jobs:
   toolchain:
     name: Uboot
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Prepare
         run: |
           sudo apt-get update
-          sudo apt-get install gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone
+          sudo apt-get install gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone python3
 
       - name: HI3516CV6XX
         run: |
