@@ -327,7 +327,7 @@ static int gmac_net_set_mac_address(struct eth_device* const dev)
 #ifdef CONFIG_NET_RANDOM_ETHADDR
 		net_random_ethaddr(mac);
 		printf("Set Random MAC address!\n");
-		eth_setenv_enetaddr("ethaddr", mac);
+		eth_env_set_enetaddr("ethaddr", mac);
 #endif
 	}
 
