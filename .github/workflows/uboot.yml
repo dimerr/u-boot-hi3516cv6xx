@@ -5,13 +5,19 @@ on:
 jobs:
   build:
     name: uboot
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Prepare
         run: |
           sudo apt-get update
-          sudo apt-get install gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone python3
+          sudo apt-get install -y gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone bison flex
+          sudo ln -sf /bin/bash /bin/sh
 
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pycryptodome
+     
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -19,7 +25,7 @@ jobs:
 
       - name: Build HI3516CV6XX
         run: |
-          cd u-boot-hi3516cv6xx
+          cd $GITHUB_WORKSPACE
           bash build.sh
 
       - name: Upload
@@ -27,5 +33,6 @@ jobs:
         with:
           tag_name: latest
           files: |
-            u-boot-*/output/*-nor.bin
-            u-boot-*/output/*-nand.bin
+            output/*-nor.bin
+            output/*-nand.bin
+          fail_on_unmatched_files: false
