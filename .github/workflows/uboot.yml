@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  toolchain:
-    name: Uboot
+  build:
+    name: uboot
     runs-on: ubuntu-24.04
     steps:
       - name: Prepare
@@ -12,9 +12,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install gcc-arm-linux-gnueabi u-boot-tools lzop gnutls-dev lzma-alone python3
 
-      - name: HI3516CV6XX
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build HI3516CV6XX
         run: |
-          git clone https://github.com/dimerr/u-boot-hi3516cv6xx --depth 1
           cd u-boot-hi3516cv6xx
           bash build.sh
 
